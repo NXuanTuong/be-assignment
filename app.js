@@ -12,6 +12,7 @@ mongoose
   .then(() => console.log("Kết nối DB thành công"))
   .catch((error) => console.log(error));
 
-app.listen(8000, () => {
-  console.log("Server is running 8000");
+const PORT = 8000
+app.listen(PORT, () => {
+  console.log("Server is running", PORT);
 });
