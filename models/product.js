@@ -6,26 +6,26 @@ const Product = new Schema(
       type: String,
       minlength: 5,
     },
-    // price_new: {
-    //   type: Number,
-    // },
-    // price_old: {
-    //   type: Number,
-    // },
-    // img: {
-    //   type: String,
-    // },
-    // desc: {
-    //   type: String,
-    // },
-    // status: {
-    //   type: Number,
-    //   default: 0,
-    // },
+    price_new: {
+      type: Number,
+    },
+    price_old: {
+      type: Number,
+    },
+    img: {
+      type: String,
+    },
+    desc: {
+      type: String,
+    },
+    status: {
+      type: Number,
+      default: 0,
+    },
     category: {
-        type: ObjectId,
-        ref: "Category"
-    }
+      type: ObjectId,
+      ref: "Category",
+    },
   },
   { timestamps: true }
 );
@@ -33,4 +33,3 @@ const Product = new Schema(
 Product.index({ "$**": "text" });
 
 export default mongoose.model("Product", Product);
-
