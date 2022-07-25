@@ -11,4 +11,5 @@ const CategoryModels = new Schema({
     }
 }, {timestamps : true})
 
+
 export default mongoose.model("Category", CategoryModels)
