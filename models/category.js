@@ -7,7 +7,8 @@ const CategoryModels = new Schema({
         minlength: 5
     },
     status: {
-        type: Number
+        type: Number,
+        default: 0
     }
 }, {timestamps : true})
 
