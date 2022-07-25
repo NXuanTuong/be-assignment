@@ -16,7 +16,7 @@ export const signup = async (request, response)=>{
                 message:"Tên user đã tồn tại"
             })
         }
-        const user = await User({email,password, name,phone,address}).save()
+        const user = await User({email,password}).save()
         response.json({
             user:{
                 _id:user._id,
