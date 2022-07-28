@@ -13,7 +13,7 @@ app.use(express.json());
 app.use("/api", productRouter);
 app.use("/api", userRouter);
 app.use("/api", categoryRouter);
-app.use(authRouter);
+app.use("/api", authRouter);
 mongoose
   .connect("mongodb://127.0.0.1:27017/assignment_Next")
   .then(() => console.log("Kết nối DB thành công"))
