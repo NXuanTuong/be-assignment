@@ -2,7 +2,7 @@ import User from "../models/user";
 import jwt from "jsonwebtoken";
 
 export const signup = async (request, response) => {
-  const { email, name, password } = request.body;
+  const { email, name, password, address, phone } = request.body;
   try {
     const exitUser = await User.findOne({ email }).exec();
     if (exitUser) {
@@ -16,7 +16,7 @@ export const signup = async (request, response) => {
         message: "Tên user đã tồn tại",
       });
     }
-    const user = await User({ email, password }).save();
+    const user = await User({  email, name, password, address, phone }).save();
     response.json({
       user: {
         _id: user._id,
@@ -37,17 +37,17 @@ export const signin = async (request, response) => {
   try {
     const user = await User.findOne({ email }).exec();
     if (!user) {
-      response.status(400).json({
+    return  response.status(400).json({
         message: "Sai email or password",
       });
     }
     if (user.status !== 0 && user.role !== 1) {
-      response.status(400).json({
+    return  response.status(400).json({
         message: "Tài khoản của bạn chưa kích hoạt",
       });
     }
     if (!user.authenticate(password)) {
-      response.status(400).json({
+    return  response.status(400).json({
         message: "Sai email or password",
       });
     }
