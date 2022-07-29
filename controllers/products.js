@@ -17,10 +17,8 @@ export const list = async (req, res) => {
   const page = req.query.page ? +req.query.page : 1;
   const skip = (page - 1) * limitNumber;
   try {
-    const product = await Product.find({})
-      .skip(skip)
-      .limit(limit)
-      .populate("category");
+    const product = await Product.find({}).skip(skip).limit(limit);
+    // .populate("category");
     res.json(product);
   } catch (error) {
     res.status(400).json({
@@ -42,13 +40,13 @@ export const get = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const product = await Product.findByIdAndRemove({
+    const product = await Product.findOneAndDelete({
       _id: req.params.id,
     }).exec();
     res.json(product);
   } catch (error) {
     res.status(400).json({
-      error: "Khong them duoc san pham",
+      error: "Khong xóa duoc san pham",
     });
   }
 };
@@ -67,16 +65,19 @@ export const update = async (req, res) => {
 };
 
 export const search = async (req, res) => {
-  const limitNumber = 20;
-  const limit = req.query.limit ? +req.query.limit : limitNumber;
-  Product.find({
-    $text: { $search: req.query.q },
-  })
-    .limit(limit)
-    .exec(function (err, data) {
-      if (err) res.json(err);
-      res.json(data);
-    });
+  try {
+    const limitNumber = 20;
+    const limit = req.query.limit ? +req.query.limit : limitNumber;
+    console.log(req.query.q);
+    const products = await Product.find({
+      name: { $regex: new RegExp(req.query.q) },
+    })
+      .limit(limit)
+      .exec();
+    res.json(products);
+  } catch (error) {
+    res.status(400).json(error);
+  }
 };
 
 export const paginate = async (req, res) => {

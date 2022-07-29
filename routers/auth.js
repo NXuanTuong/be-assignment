@@ -1,8 +1,9 @@
 import express from "express";
-import {  signin, signup } from "../controllers/auth";
-const authRouter = express()
+import { getAuth, signin, signup } from "../controllers/auth";
+const authRouter = express();
 
-authRouter.post("/signup",signup)
-authRouter.post("/signin",signin)
+authRouter.post("/auth/signup", signup);
+authRouter.get("/auth", getAuth);
+authRouter.post("/auth/signin", signin);
 
-export default authRouter
+export default authRouter;
