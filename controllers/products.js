@@ -17,8 +17,10 @@ export const list = async (req, res) => {
   const page = req.query.page ? +req.query.page : 1;
   const skip = (page - 1) * limitNumber;
   try {
-    const product = await Product.find({}).skip(skip).limit(limit);
-    // .populate("category");
+    const product = await Product.find({})
+      .skip(skip)
+      .limit(limit)
+      .populate("category");
     res.json(product);
   } catch (error) {
     res.status(400).json({
