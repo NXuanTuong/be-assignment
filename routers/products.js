@@ -1,5 +1,12 @@
 import { Router } from "express";
-import { create, get, list, remove, search, update } from "../controllers/products";
+import {
+  create,
+  get,
+  list,
+  remove,
+  search,
+  update,
+} from "../controllers/products";
 const router = Router();
 
 router.get("/products", list);
@@ -12,5 +19,5 @@ router.delete("/products/:id", remove);
 
 router.put("/products/:id", update);
 
-router.get("/product", search)
+router.get("/products?q", search);
 export default router;
