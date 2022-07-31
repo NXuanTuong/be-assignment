@@ -19,5 +19,6 @@ router.delete("/products/:id", remove);
 
 router.put("/products/:id", update);
 
-router.get("/products?q", search);
+router.get("/product/search", search);
+
 export default router;
