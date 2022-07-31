@@ -2,7 +2,7 @@ import User from "../models/user";
 import jwt from "jsonwebtoken";
 
 export const signup = async (request, response) => {
-  const { email, name, password } = request.body;
+  const { email, name, password, phone, address } = request.body;
   try {
     const exitUser = await User.findOne({ email }).exec();
     if (exitUser) {
@@ -16,7 +16,7 @@ export const signup = async (request, response) => {
         message: "Tên user đã tồn tại",
       });
     }
-    const user = await User({ email, password }).save();
+    const user = await User({ email, password,name, phone, address }).save();
     response.json({
       user: {
         _id: user._id,
