@@ -51,7 +51,6 @@ export const signin = async (request, response) => {
         message: "Tài khoản của bạn chưa kích hoạt",
       });
     }
-    
     const token = jwt.sign({ _id: user._id }, "123456", { expiresIn: "12h" });
     response.json({
       token,
