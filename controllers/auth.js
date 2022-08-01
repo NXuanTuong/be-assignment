@@ -37,20 +37,21 @@ export const signin = async (request, response) => {
   try {
     const user = await User.findOne({ email }).exec();
     if (!user) {
-      response.status(400).json({
+    return  response.status(400).json({
         message: "Sai email or password",
-      });
-    }
-    if (user.status !== 0 && user.role !== 1) {
-      response.status(400).json({
-        message: "Tài khoản của bạn chưa kích hoạt",
       });
     }
     if (!user.authenticate(password)) {
-      response.status(400).json({
-        message: "Sai email or password",
+      return  response.status(400).json({
+          message: "Sai email or password",
+        });
+      }
+    if (user.status !== 0 && user.role !== 1) {
+    return  response.status(400).json({
+        message: "Tài khoản của bạn chưa kích hoạt",
       });
     }
+    
     const token = jwt.sign({ _id: user._id }, "123456", { expiresIn: "12h" });
     response.json({
       token,
