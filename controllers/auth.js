@@ -41,14 +41,14 @@ export const signin = async (request, response) => {
         message: "Sai email or password",
       });
     }
+    if (!user.authenticate(password)) {
+      return  response.status(400).json({
+          message: "Sai email or password",
+        });
+      }
     if (user.status !== 0 && user.role !== 1) {
     return  response.status(400).json({
         message: "Tài khoản của bạn chưa kích hoạt",
-      });
-    }
-    if (!user.authenticate(password)) {
-    return  response.status(400).json({
-        message: "Sai email or password",
       });
     }
     const token = jwt.sign({ _id: user._id }, "123456", { expiresIn: "12h" });
