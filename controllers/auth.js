@@ -2,7 +2,11 @@ import User from "../models/user";
 import jwt from "jsonwebtoken";
 
 export const signup = async (request, response) => {
+<<<<<<< HEAD
   const { email, name, password, address, phone } = request.body;
+=======
+  const { email, name, password, phone, address } = request.body;
+>>>>>>> af40f3e3b67c5eb781339fb804d00aabdb02424b
   try {
     const exitUser = await User.findOne({ email }).exec();
     if (exitUser) {
@@ -16,7 +20,11 @@ export const signup = async (request, response) => {
         message: "Tên user đã tồn tại",
       });
     }
+<<<<<<< HEAD
     const user = await User({  email, name, password, address, phone }).save();
+=======
+    const user = await User({ email, password,name, phone, address }).save();
+>>>>>>> af40f3e3b67c5eb781339fb804d00aabdb02424b
     response.json({
       user: {
         _id: user._id,

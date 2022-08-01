@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+const { ObjectId } = mongoose.Types;
 const Product = new Schema(
   {
     name: {
@@ -20,6 +21,10 @@ const Product = new Schema(
     status: {
       type: Number,
       default: 0,
+    },
+    category: {
+      type: ObjectId,
+      ref: "Category",
     },
   },
   { timestamps: true }
