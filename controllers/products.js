@@ -30,9 +30,11 @@ export const list = async (req, res) => {
 };
 
 export const get = async (req, res) => {
+  const category = req.query.category;
   try {
     const product = await Product.findOne({ _id: req.params.id }).exec();
-    res.json(product);
+    const productRelated = await Product.find({category:category}).exec()
+    res.json({product,productRelated});
   } catch (error) {
     res.status(400).json({
       error: "Khong them duoc san pham",
