@@ -33,8 +33,12 @@ export const get = async (req, res) => {
   const category = req.query.category;
   try {
     const product = await Product.findOne({ _id: req.params.id }).exec();
-    const productRelated = await Product.find({category:category}).exec()
-    res.json({product,productRelated});
+    if(category){
+      const productRelated = await Product.find({category:category}).exec()
+      res.json({product,productRelated});
+    }else{
+      res.json(product)
+    }
   } catch (error) {
     res.status(400).json({
       error: "Khong them duoc san pham",
